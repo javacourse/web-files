@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 public class HelloServiceImpl implements HelloService {
 
     @Override
-    public String helloMessage()
-    {
-        return "Spring MVC Hello World";
+    public String helloMessage(){
+        return "Spring MVC Hello World.";
     }
 }
