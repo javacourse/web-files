@@ -31,7 +31,8 @@ public final class FolerServiceImpl implements FolderService{
         } else {
             StringBuilder tempStr = new StringBuilder("");
             for(int i = 0; i < splitedPath.length - 1; i++){
-                if(!splitedPath[i].isEmpty()){
+                boolean isEmpty = splitedPath[i].isEmpty();
+                if(!isEmpty){
                     tempStr.append("/").append(splitedPath[i]);
                 }
             }
