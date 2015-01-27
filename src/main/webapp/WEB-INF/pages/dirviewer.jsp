@@ -11,14 +11,16 @@
         <tbody>
         <c:if test="${null != parentFolder}">
             <tr>
-                <td><a href="#">.. (${parentFolder})</a></td>
+                <td>
+                    <a href="<c:url value="/dirviewer/${parentFolder}"/>">..</a>
+                </td>
             </tr>
         </c:if>
         <c:forEach var="item" items="${folderContent}">
             <tr>
                 <td>
                     <c:if test="${item.isDirectory()}">
-                        <a href="#">${item.getName()}</a>
+                        <a href='<c:url value="/dirviewer"/>${"/" == currentFolder ? "" : currentFolder}/${item.getName()}'>${item.getName()}</a>
                     </c:if>
                     <c:if test="${!item.isDirectory()}">
                         ${item.getName()}

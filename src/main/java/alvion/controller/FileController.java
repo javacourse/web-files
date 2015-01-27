@@ -15,26 +15,16 @@ public class FileController {
 
     @Autowired
     private FolderService folderService;
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index() {
-        ModelAndView model = new ModelAndView("dirviewer");
-        try {
-            folderService.setFolder("/home/elazarchuk");
-            model.addObject("parentFolder", folderService.getParentFolderName());
-            model.addObject("currentFolder", folderService.getFolderName());
-            model.addObject("folderContent", folderService.getFolderContent());
-        } catch (FileNotFoundException ex) {
-            model.setViewName("dirviewer404");
-        }
-		return model;
-	}
     
-    @RequestMapping(value = "list/{dir}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView list() {
+        return list("");
+	}
+    @RequestMapping(value = "{dir}", method = RequestMethod.GET)
     public ModelAndView list(@PathVariable String dir) {
         ModelAndView model = new ModelAndView("dirviewer");
         try {
-            folderService.setFolder(dir.isEmpty() ? "/" : dir);
+            folderService.setFolder("/".concat(dir));
             model.addObject("parentFolder", folderService.getParentFolderName());
             model.addObject("currentFolder", folderService.getFolderName());
             model.addObject("folderContent", folderService.getFolderContent());
