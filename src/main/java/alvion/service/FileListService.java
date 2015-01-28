@@ -8,5 +8,5 @@ import java.util.List;
  * Created by Odour on 28.01.2015.
  */
 public interface FileListService {
-    public List<FileInfoModel> getFileList(String pathname);
+    public List<FileInfoModel> getFileList(String pathname) throws Exception;
 }

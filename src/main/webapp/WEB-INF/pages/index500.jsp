@@ -13,7 +13,7 @@
     <title></title>
 </head>
 <body>
-<H1>Sorry, but you do not have permissions for such directory :(</H1>
+<H1>Sorry, but you do not have permissions for such directory, or requested directory does not exist :(</H1>
 <a href="<c:url value="/list/${prevFolder}"/>">Return to the previous folder</a>
 </body>
 </html>

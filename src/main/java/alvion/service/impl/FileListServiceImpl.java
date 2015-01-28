@@ -15,11 +15,15 @@ import java.util.List;
 @Service
 public class FileListServiceImpl implements FileListService {
 
-    public List<FileInfoModel> getFileList(String pathname) {
+    public List<FileInfoModel> getFileList(String pathname) throws Exception{
         File rootDir = new File(pathname);
         List<FileInfoModel> foundFiles = new ArrayList<>();
         List<FileInfoModel> files = new ArrayList<>();
         List<FileInfoModel> dirs = new ArrayList<>();
+
+        if (!rootDir.exists()) {
+            throw new NullPointerException();
+        }
 
         if (rootDir.isDirectory()) {
             File[] filesArray = rootDir.listFiles();

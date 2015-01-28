@@ -63,12 +63,25 @@
 
     .cellwidth {
       width: 300px;
+      border-bottom:#C4D8FF solid 1px;
+    }
+
+    .cellwidthlast {
+      width: 600px;
+      text-align: right;
+      border-bottom:#C4D8FF solid 1px;
     }
 
     .icon {
       width: 20px;
       height: 20px;
     }
+
+    .curdir {
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+
   </style>
 </head>
 <body>
@@ -77,18 +90,21 @@
     File browser
   </div>
   <div class="content">
+    <div class="curdir">
+      <h4>Current directory: </h4>
+      ${curFolder}
+    </div>
 
-    <table>
+    <table cellspacing="0">
     <c:if test="${!''.equals(prevFolder)}">
       <tr>
         <td>
           <img src="<c:url value="/resources/images/Card_file.png"/>" class="icon"/>
         </td>
-        <td class="cellwidth">
+        <td>
           <a href="<c:url value="/list/${prevFolder}"/>">..</a>
         </td>
         <td>
-
         </td>
       </tr>
     </c:if>
@@ -102,7 +118,7 @@
             <td class="cellwidth">
             ${fileName.getFileName()}
             </td>
-            <td>
+            <td class="cellwidthlast">
             ${fileName.getSize()} bytes
             </td>
             </tr>
@@ -115,7 +131,7 @@
            <td class="cellwidth">
              <a href="<c:url value="/list/${fileName.getPath()}"/>">${fileName.getFileName()}</a>
            </td>
-           <td>
+           <td class="cellwidthlast">
 
            </td>
          </tr>

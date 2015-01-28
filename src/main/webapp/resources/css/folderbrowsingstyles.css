@@ -48,6 +48,13 @@ body {
 
 .cellwidth {
     width: 300px;
+    border-bottom:#C4D8FF solid 1px;
+}
+
+.cellwidthlast {
+    width: 600px;
+    text-align: right;
+    border-bottom:#C4D8FF solid 1px;
 }
 
 .icon {
