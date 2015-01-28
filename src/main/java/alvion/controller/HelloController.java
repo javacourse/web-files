@@ -33,7 +33,7 @@ public class HelloController {
         System.out.println(request.getRequestURI());
         System.out.println(request.getRequestURL().toString());
         ModelAndView model = new ModelAndView("list");
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList();
         list.add("String 1");
         list.add("String 2");
         list.add("String 3");
