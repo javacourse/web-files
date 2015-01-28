@@ -37,6 +37,6 @@ public class FileInfoModel implements Comparable{
     @Override
     public int compareTo(Object o) {
         FileInfoModel obj = (FileInfoModel) o;
-        return fileName.compareTo(obj.getFileName());
+        return fileName.compareToIgnoreCase(obj.getFileName());
     }
 }
