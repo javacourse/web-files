@@ -4,7 +4,7 @@ package alvion.model;
  * Created by Odour on 23.01.2015.
  */
 
-public class FileInfo implements Comparable{
+public class FileInfoModel implements Comparable{
 
     private String fileName;
     private boolean isDir;
@@ -27,7 +27,7 @@ public class FileInfo implements Comparable{
         return path;
     }
 
-    public FileInfo(String fileName, boolean dirFlag, long size, String path) {
+    public FileInfoModel(String fileName, boolean dirFlag, long size, String path) {
         this.fileName = fileName;
         this.isDir = dirFlag;
         this.size = size;
@@ -36,7 +36,7 @@ public class FileInfo implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        FileInfo obj = (FileInfo) o;
+        FileInfoModel obj = (FileInfoModel) o;
         return fileName.compareTo(obj.getFileName());
     }
 }
