@@ -12,12 +12,40 @@
     <title>File Browser</title>
 </head>
 <body>
-Test
 <a href="<c:url value="/listoffiles/${rootFolder}"/>">${rootFolder}</a>
-<c:forEach items="${fileList}" var="item">
-  <a href="<c:url value="/listoffiles/${item.getName()}"/>">${item.getName()}</a>
-  <br>
+<br>
+<table cellspacing="1" border="1">
+  <c:forEach items="${fileList}" var="item">
+
+  <c:if test="${item.getIsDir()}">
+    <tr>
+      <td>
+        <img src="<c:url value="/resources/folder.png"/>" class="icon"/>
+      </td>
+      <td>
+        <a href="<c:url value="/listoffiles/${item.getName()}"/>">${item.getName()}</a>
+      </td>
+      <td>
+          ${item.getSize()} bytes
+      </td>
+    </tr>
+  </c:if>
+
+  <c:if test="${!item.getIsDir()}">
+    <tr>
+      <td>
+        <img src="<c:url value="/resources/copy_edit_co.png"/>" class="icon"/>
+      </td>
+      <td>
+        ${item.getName()}
+      </td>
+      <td>
+          ${item.getSize()} bytes
+      </td>
+    </tr>
+  </c:if>
 </c:forEach>
+</table>
 </body>
 </html>
 

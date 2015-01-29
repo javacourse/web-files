@@ -31,6 +31,10 @@ import java.util.List;
             try {
                 List<FileInfo> fileList = fileservice.getItems(rootFolder);
                 model.addObject("fileList", fileList);
+                //model.addObject("test", true);
+                for (FileInfo s : fileList) {
+                    System.out.println(s.toString());
+                }
             } catch(Exception e) {
                 model = new ModelAndView("test");
             }
@@ -41,12 +45,21 @@ import java.util.List;
         public ModelAndView list(@PathVariable String lf, HttpServletRequest request) {
 
             //System.out.println("1= " + request.getRequestURI());
-            //System.out.println("2= " + request.getRequestURL().toString());
+            System.out.println("2= " + request.getRequestURL().toString());
+            System.out.println(lf.toString());
             ModelAndView model = new ModelAndView("listoffiles");
-
+            //String rootFolder = "d://";
+            model.addObject("lf", lf);
+            //model.addObject("test", true);
+            model.addObject("rootFolder", lf);
             try {
-                List<FileInfo> fileList = fileservice.getItems(lf);
+                String otherFolder = "d://1/";
+                model.addObject("otherFolder", otherFolder);
+                List<FileInfo> fileList = fileservice.getItems(otherFolder);
                 model.addObject("fileList", fileList);
+                for (FileInfo s : fileList) {
+                    System.out.println(s.toString());
+                }
             } catch(Exception e) {
                 model = new ModelAndView("test");
             }
