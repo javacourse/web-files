@@ -10,17 +10,14 @@ import java.util.*;
  * Created by Toshiba on 22.01.2015.
  */
 public class FileRepository {
-    private File path;
 
-    public void init(String pathname) throws Exception {
+    public List<FileDto> getDirectoryInfo(String pathname) throws Exception {
+
         String userHome = System.getProperty("user.home");
-        path = new File(userHome + pathname);
+        File path = new File(userHome + pathname);
         if(!path.exists()){
             throw new Exception ("Directory not found on this server");
         }
-    }
-
-    public List<FileDto> getDirectoryInfo(){
 
         List<FileDto> filesList = new LinkedList<>();
         File[] files = path.listFiles();

@@ -22,5 +22,5 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	<bean class="alvion.utils.FileManager" id="fileManager"/>
+	<bean class="alvion.repository.FileRepository" id="fileRepository"/>
 </beans>
