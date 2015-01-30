@@ -1,15 +1,20 @@
 package alvion.controller;
 
+import alvion.libs.FileInfo;
+import alvion.libs.FileScanner;
 import alvion.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -19,24 +24,29 @@ public class HelloController {
     private HelloService helloService;
 
     @RequestMapping(method = RequestMethod.GET)
-	public ModelAndView printWelcome() {
-        ModelAndView model = new ModelAndView("hello");
-		model.addObject("message", helloService.helloMessage());
-		return model;
-
+	public ModelAndView index() {
+        return new ModelAndView("redirect:/path/");
 	}
 
-    @RequestMapping(value = "list/{name}", method = RequestMethod.GET)
-    public ModelAndView list(@PathVariable String name) {
+    @RequestMapping(value = "/path/**", method = RequestMethod.GET)
+    public ModelAndView list(HttpServletRequest request) {
+        String url = request.getRequestURI().toString();
+
+        String urlParams = url.substring(6); //path without '/path' string
+        String userHomeDirectory = System.getProperty("user.home");
+        String folderPath = userHomeDirectory.toString() + "/" + urlParams;
+
+        Set<FileInfo> files = FileScanner.scan(folderPath, userHomeDirectory);
+        File parentFolder = new File(folderPath.replaceFirst("^" + userHomeDirectory, ""));
+        String parentPath = parentFolder.getParent();
 
         ModelAndView model = new ModelAndView("list");
-        List<String> list = new ArrayList<>();
-        list.add("String 1");
-        list.add("String 2");
-        list.add("String 3");
-        list.add(name);
-        model.addObject("list", list);
-        return model;
 
+        model.addObject("files", files);
+        model.addObject("parent", parentPath);
+        model.addObject("homePath", userHomeDirectory.toString());
+        model.addObject("h", urlParams);
+        return model;
     }
+
 }
