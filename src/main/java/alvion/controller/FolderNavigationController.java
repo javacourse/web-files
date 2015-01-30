@@ -48,9 +48,12 @@ public class FolderNavigationController {
         }
         try {
             List<FileInfoModel> fileList = fileListService.getFileList(nextFolderPath);
+            List<FileInfoModel> dirsList = fileListService.getDirsList(nextFolderPath);
             model.addObject("fileList", fileList);
+            model.addObject("dirsList", dirsList);
             model.addObject("prevFolder", curFolderPath);
             model.addObject("curFolder", nextFolderPath);
+
         } catch(Exception e) {
             model = new ModelAndView("index500");
             model.addObject("prevFolder", curFolderPath);

@@ -47,4 +47,29 @@ public class FileListServiceImpl implements FileListService {
 
         return foundFiles;
     }
+
+    public List<FileInfoModel> getDirsList(String pathname) throws Exception {
+        File rootDir = new File(pathname);
+        List<FileInfoModel> foundFiles = new ArrayList<>();
+
+        if (!rootDir.exists()) {
+            throw new NullPointerException();
+        }
+
+        if (rootDir.isDirectory()) {
+            foundFiles.add(new FileInfoModel(rootDir.getName(), rootDir.isDirectory(),rootDir.length(),rootDir.getPath()));
+
+            while (true) {
+                rootDir = rootDir.getParentFile();
+
+                if (rootDir == null) {
+                    break;
+                }
+                foundFiles.add(new FileInfoModel(rootDir.getName(), rootDir.isDirectory(), rootDir.length(), rootDir.getPath()));
+            }
+
+        Collections.reverse(foundFiles);
+        }
+        return foundFiles;
+    }
 }

@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface FileListService {
     public List<FileInfoModel> getFileList(String pathname) throws Exception;
+    public List<FileInfoModel> getDirsList(String pathname) throws Exception;
 }

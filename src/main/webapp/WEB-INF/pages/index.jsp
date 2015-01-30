@@ -91,8 +91,12 @@
   </div>
   <div class="content">
     <div class="curdir">
-      <h4>Current directory: </h4>
-      ${curFolder}
+      <!--<h4>Current directory: </h4>-->
+      <!--${curFolder}-->
+     <h4> <c:forEach items="${dirsList}" var="dir">
+        <a href="<c:url value="/list/${dir.getPath()}"/>">${dir.getFileName()}</a> /
+      </c:forEach>
+       </h4>
     </div>
 
     <table cellspacing="0">
