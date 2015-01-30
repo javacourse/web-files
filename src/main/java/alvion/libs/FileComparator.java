@@ -1,6 +1,5 @@
 package alvion.libs;
 
-import java.io.File;
 import java.util.Comparator;
 
 public class FileComparator implements Comparator<FileInfo> {

@@ -2,16 +2,22 @@
 <%@ page session="false"%>
 <jsp:include page="layout/header.jsp" />
 <h3>File System</h3>
-<h4>${homePath}/${h}</h4>
+<h4>${homePath}/${urlParams}</h4>
 <c:choose>
     <c:when test="${parent != null}">
         <p>
-            <a href="<c:url value="/path${parent}"/>">
+            <a href="<c:url value="/path${parentPath}"/>">
                 <b>
                     <i class="glyphicon glyphicon-folder-open"></i>
                 </b>
             </a>
         </p>
+    </c:when>
+</c:choose>
+
+<c:choose>
+    <c:when test="${!pathExists}">
+        <h3>Path not found</h3>
     </c:when>
 </c:choose>
 
