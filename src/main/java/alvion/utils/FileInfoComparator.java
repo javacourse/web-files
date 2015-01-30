@@ -1,7 +1,6 @@
 package alvion.utils;
 
 import alvion.model.FileInfo;
-
 import java.util.Comparator;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Comparator;
 public class FileInfoComparator implements Comparator<FileInfo> {
     @Override
     public int compare(FileInfo f1, FileInfo f2) {
-        int k = ((Boolean) f1.isDir()).compareTo(f2.isDir());
+        int k = (f1.isDir() == f2.isDir()) ? 0 : (f1.isDir() ? 1 : -1);
         if (k == 0) {
             return f1.getFile().compareTo(f2.getFile());
         }

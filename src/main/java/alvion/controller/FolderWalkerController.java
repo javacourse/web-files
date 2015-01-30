@@ -15,10 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/")
 public class FolderWalkerController {
-    private FolderWalker folderWalker = new FolderWalker("C:\\");
+    private FolderWalker folderWalker;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView init() {
+        if (folderWalker == null) {
+            folderWalker = new FolderWalker("C:\\");
+        }
         return new ModelAndView("folders").addObject("fw", folderWalker);
     }
 
@@ -28,8 +31,8 @@ public class FolderWalkerController {
         return new ModelAndView("folders").addObject("fw", folderWalker);
     }
 
-    @RequestMapping(value = "back/{xxx}", method = RequestMethod.GET)
-    public ModelAndView back(@PathVariable String xxx) {
+    @RequestMapping(value = "back", method = RequestMethod.GET)
+    public ModelAndView back() {
         folderWalker.walkUp();
         return new ModelAndView("folders").addObject("fw", folderWalker);
     }
