@@ -25,6 +25,12 @@ public class FolderWalkerController {
         return new ModelAndView("folders").addObject("fw", folderWalker);
     }
 
+    @RequestMapping(value = "root", method = RequestMethod.GET)
+    public ModelAndView root() {
+        folderWalker.walkRoot();
+        return new ModelAndView("folders").addObject("fw", folderWalker);
+    }
+
     @RequestMapping(value = "item", method = RequestMethod.GET)
     public ModelAndView list(@RequestParam(value = "folder") String folder) {
         folderWalker.walkInto(folder);

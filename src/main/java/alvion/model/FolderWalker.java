@@ -26,6 +26,11 @@ public class FolderWalker {
         return rootFolder;
     }
 
+    public void walkRoot() {
+        folders.clear();
+    }
+
+
     public void walkUp() {
         if (folders.size() > 0) {
             folders.remove(folders.size() - 1);

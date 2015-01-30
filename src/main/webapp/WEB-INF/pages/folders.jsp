@@ -6,7 +6,7 @@
     <title>Home</title>
   </head>
 <body>
-  <a >${fw.getRootFolder()}</a>
+  <a href="root">${fw.getRootFolder()}</a>
   <br />
   <c:if test = "${fw.canWalkUp()}">
     <c:set var="index" value="${0}" />
@@ -24,7 +24,7 @@
       <c:set var="index" value="${index + 1}" />
     </c:forEach>
     <br />
-      <a href="back?"> ... </a>
+      <a href="back"> ... </a>
     <br />
   </c:if>
 
