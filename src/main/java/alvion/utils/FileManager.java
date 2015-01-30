@@ -12,7 +12,7 @@ import java.util.*;
 public class FileManager {
     private File path;
 
-    public FileManager(String pathname) throws Exception {
+    public void init(String pathname) throws Exception {
         String userHome = System.getProperty("user.home");
         path = new File(userHome + pathname);
         if(!path.exists()){
