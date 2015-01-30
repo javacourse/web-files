@@ -1,4 +1,4 @@
-package alvion.utils;
+package alvion.repository;
 
 
 import alvion.dto.FileDto;
@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by Toshiba on 22.01.2015.
  */
-public class FileManager {
+public class FileRepository {
     private File path;
 
     public void init(String pathname) throws Exception {

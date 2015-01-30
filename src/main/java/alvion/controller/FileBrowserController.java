@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/files/**")
-public class FileManagerController {
+public class FileBrowserController {
 
     @Autowired
     private FileService fileService;
