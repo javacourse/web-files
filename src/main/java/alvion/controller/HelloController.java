@@ -1,6 +1,6 @@
 package alvion.controller;
 
-import alvion.service.HelloService;
+import alvion.service.FileManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +16,42 @@ import java.util.List;
 public class HelloController {
 
     @Autowired
-    private HelloService helloService;
+    private FileManagerService fileManagerService;
 
     @RequestMapping(method = RequestMethod.GET)
 	public ModelAndView printWelcome() {
+
         ModelAndView model = new ModelAndView("hello");
-		model.addObject("message", helloService.helloMessage());
+		model.addObject("fileList", fileManagerService.showCurrentDir());
 		return model;
 
 	}
+
+    @RequestMapping(value = "/folder/{name}", method = RequestMethod.GET)
+    public ModelAndView folder(@PathVariable String name) {
+
+        ModelAndView model = new ModelAndView("hello");
+        if ( name !=null && !name.isEmpty() )
+        {
+            fileManagerService.changeFolder( name);
+        }
+
+        model.addObject("fileList", fileManagerService.showCurrentDir());
+        return model;
+
+    }
+
+/*
+    @RequestMapping(value = "up}", method = RequestMethod.GET)
+    public ModelAndView up() {
+
+        ModelAndView model = new ModelAndView("hello");
+        fileManagerService.changeFolder("..");
+        model.addObject("fileList", fileManagerService.showCurrentDir());
+        return model;
+
+    }*/
+
 
     @RequestMapping(value = "list/{name}", method = RequestMethod.GET)
     public ModelAndView list(@PathVariable String name) {
