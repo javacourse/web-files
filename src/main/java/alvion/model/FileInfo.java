@@ -7,7 +7,7 @@ public class FileInfo implements Comparable<FileInfo> {
     private boolean isDir;
     private String isDirName;
     private long size;
-    private String absolutePath;
+    private String Path;
 
     /* @Override*/
     @Override
@@ -18,14 +18,14 @@ public class FileInfo implements Comparable<FileInfo> {
 
     @Override
     public String toString() {
-        return "n="+name+" isDir="+isDir+ " Size= "+size +" Path=" + absolutePath;
+        return "n="+name+" isDir="+isDir+ " Size= "+size +" Path=" + Path;
     }
 
-    public FileInfo(String name, boolean isDir, long size, String absolutePath){
+    public FileInfo(String name, boolean isDir, long size, String Path){
         this.name = name;
         this.isDir = isDir;
         this.size = size;
-        this.absolutePath = absolutePath;
+        this.Path = Path;
         if (isDir ==true) {
             this.isDirName = "0"+name;
         }else{
@@ -41,8 +41,8 @@ public class FileInfo implements Comparable<FileInfo> {
     public long getSize(){
         return size;
     }
-    public String getabsolutePath(){
-        return absolutePath;
+    public String getPath(){
+        return Path;
     }
     public void setName(String name){
         this.name = name;
@@ -59,7 +59,7 @@ public class FileInfo implements Comparable<FileInfo> {
     public void setSize(long size){
         this.size = size;
     }
-    public void setSize(String absolutePath){
-        this.absolutePath = absolutePath;
+    public void setPath(String Path){
+        this.Path = Path;
     }
 }

@@ -12,7 +12,9 @@
     <title>File Browser</title>
 </head>
 <body>
-<a href="<c:url value="/listoffiles/${rootFolder}"/>">${rootFolder}</a>
+<a href="<c:url value="/"/>"><img src="<c:url value="/resources/stepinto_co.png"/>" class="icon"/></a>
+<br>
+<a href="<c:url value="/listoffiles/${currentFolder}"/>">${currentFolder}</a>
 <br>
 <table cellspacing="1" border="1">
   <c:forEach items="${fileList}" var="item">
@@ -23,7 +25,7 @@
         <img src="<c:url value="/resources/folder.png"/>" class="icon"/>
       </td>
       <td>
-        <a href="<c:url value="/listoffiles/${item.getName()}"/>">${item.getName()}</a>
+        <a href="<c:url value="/listoffiles/${item.getPath()}"/>">${item.getName()}</a>
       </td>
       <td>
           ${item.getSize()} bytes

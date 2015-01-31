@@ -4,7 +4,6 @@ import alvion.model.FileInfo;
 import alvion.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +18,8 @@ import java.util.List;
     @Controller
     @RequestMapping("/")
     public class ItemController {
+    public String rootFolder = "d:\\";
+    //StringBuilder builder = new StringBuilder();
 
         @Autowired
         private FileService fileservice;
@@ -26,55 +27,44 @@ import java.util.List;
         @RequestMapping(method = RequestMethod.GET)
         public ModelAndView init() throws UnsupportedEncodingException {
             ModelAndView model = new ModelAndView("listoffiles");
-            String rootFolder = "d://";
             model.addObject("rootFolder", rootFolder);
             try {
                 List<FileInfo> fileList = fileservice.getItems(rootFolder);
                 model.addObject("fileList", fileList);
-                //model.addObject("test", true);
-                for (FileInfo s : fileList) {
-                    System.out.println(s.toString());
-                }
             } catch(Exception e) {
                 model = new ModelAndView("test");
             }
-            return model;
+             return model;
         }
 
-        @RequestMapping(value = "/listoffiles/{lf}", method = RequestMethod.GET)
-        public ModelAndView list(@PathVariable String lf, HttpServletRequest request) {
+        @RequestMapping(value = "/listoffiles/**", method = RequestMethod.GET)
+        //@RequestMapping(value = "listoffiles/{lf}", method = RequestMethod.GET)
+        public ModelAndView showIndexPage(HttpServletRequest request) throws UnsupportedEncodingException {
+    //public ModelAndView list(@PathVariable String lf, HttpServletRequest request) {
 
-            //System.out.println("1= " + request.getRequestURI());
-            System.out.println("2= " + request.getRequestURL().toString());
-            System.out.println(lf.toString());
+            String curFolderPath = "";
+            String prevFolderPath = "";
+            curFolderPath = request.getRequestURI();
+            StringBuilder strBuilder = new StringBuilder();
+            curFolderPath = curFolderPath.replace("/listoffiles/","");
+            curFolderPath = fileservice.checkpath(curFolderPath);
+            prevFolderPath = fileservice.parseStr(fileservice.checkpath(curFolderPath));
+            System.out.println(fileservice.checkpath(curFolderPath));
+
             ModelAndView model = new ModelAndView("listoffiles");
-            //String rootFolder = "d://";
-            model.addObject("lf", lf);
-            //model.addObject("test", true);
-            model.addObject("rootFolder", lf);
             try {
-                String otherFolder = "d://1/";
-                model.addObject("otherFolder", otherFolder);
-                List<FileInfo> fileList = fileservice.getItems(otherFolder);
+
+                List<FileInfo> fileList = fileservice.getItems(rootFolder+curFolderPath);
                 model.addObject("fileList", fileList);
-                for (FileInfo s : fileList) {
-                    System.out.println(s.toString());
-                }
+                model.addObject("currentFolder", fileservice.checkpath(prevFolderPath));
+                //model.addObject("rootFolder", rootFolder+lf.toString());
+
             } catch(Exception e) {
+
                 model = new ModelAndView("test");
             }
 
-
-            /*List<String> list = new ArrayList();
-            list.add("c://");
-            list.add("d://");
-            list.add("String 3");
-            list.add(path);
-            model.addObject("list", list);*/
             return model;
 
         }
     }
-//----------------------------------
-//----------------------------------
-
