@@ -31,13 +31,12 @@ public class FolderNavigationRESTController {
     private FolderService folderService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<FileInfoModel> init() throws UnsupportedEncodingException {
+    public @ResponseBody List<FileInfoModel> init() throws UnsupportedEncodingException {
         return showIndexPage(null);
     }
 
-    @RequestMapping(value = "rest/list/**", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<FileInfoModel> showIndexPage(HttpServletRequest request) throws UnsupportedEncodingException {
+    @RequestMapping(value = "/list/**", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<FileInfoModel> showIndexPage(HttpServletRequest request) throws UnsupportedEncodingException {
 
         String nextFolderPath = "";
         List<FileInfoModel> fileList = new ArrayList<>();
