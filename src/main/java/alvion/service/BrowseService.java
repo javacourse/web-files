@@ -10,7 +10,7 @@ import java.util.Set;
  * Date: 1/27/2015
  */
 public interface BrowseService {
-    void readDirectory(String path);
+    Set<FileEntry> readDirectory(String path);
     Set<FileEntry> getDirContent(int dirCode);
     Map<String, Integer> getHeadDirectories();
 }

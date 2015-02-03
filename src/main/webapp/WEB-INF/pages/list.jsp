@@ -1,8 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
-<title>Home</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Home</title>
 	<link rel="stylesheet" href="<c:url value="/resources/css/screen.css" />" type="text/css" />
 </head>
 <body>
@@ -44,6 +46,11 @@
 		<td align="right">
 		    <c:if test="${item.isDirectory == 'false'}">
 		        ${item.size}
+			</c:if>
+		</td>
+		<td>
+			<c:if test="${item.isDirectory == 'true'}">
+				<a href="<c:url value="/rest/${item.path}"/>">json</a>
 			</c:if>
 		</td>
 	</tr>

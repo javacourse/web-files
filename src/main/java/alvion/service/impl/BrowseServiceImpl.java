@@ -28,11 +28,11 @@ public class BrowseServiceImpl implements BrowseService {
     }
 
     @Override
-    public void readDirectory(String path) {
+    public Set<FileEntry> readDirectory(String path) {
         String cleanPath = FileEntry.cleanPath(path);
 
         if (cleanPath.equals(currentPath)) {
-            return;
+            return entries;
         }
 
         if (!entries.isEmpty()) {
@@ -60,6 +60,7 @@ public class BrowseServiceImpl implements BrowseService {
                 }
             }
         }
+        return entries;
     }
 
     @Override
