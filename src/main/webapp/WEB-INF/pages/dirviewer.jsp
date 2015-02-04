@@ -12,7 +12,7 @@
         <c:if test="${null != parentFolder}">
             <tr>
                 <td>
-                    <a href="<c:url value="/dirviewer/${parentFolder}"/>">..</a>
+                    <a href="<c:url value="/dirviewer${parentFolder.isEmpty() ? '/' : parentFolder}"/>">..</a>
                 </td>
             </tr>
         </c:if>

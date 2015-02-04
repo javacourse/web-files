@@ -20,16 +20,11 @@ public class FileController {
     @Autowired
     private FolderService folderService;
     
-/*    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView list() {
-        return new ModelAndView("redirect:/path/");
-	}
-    */
-    
     @RequestMapping(value = "**", method = RequestMethod.GET)
     public ModelAndView list(HttpServletRequest request) throws UnsupportedEncodingException {
-        String dir = request.getRequestURI().toString().replaceAll("/web-files/dirviewer", "");
+        String dir = request.getRequestURI();
         dir = URLDecoder.decode(dir, "UTF-8");
+        dir = dir.substring(21);
         
         ModelAndView model = new ModelAndView("dirviewer");
         try {
