@@ -45,7 +45,6 @@ public class FileServiceImp implements FileService{
     public String parseStr(String str) {
         String s ="";
         StringTokenizer stk = new StringTokenizer(str,"/");
-        ArrayList<String> list = new ArrayList<String>();
         String []ar = new String[stk.countTokens()];
         int i = 0;
             while (i < ar.length - 1) {

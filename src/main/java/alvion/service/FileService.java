@@ -11,10 +11,5 @@ public interface FileService {
     public List<FileInfo> getItems(String pathname) throws Exception;
     public String checkpath(String str);
     public String parseStr(String str);
-
-    //public List<FileInfo> getFileList(String pathname) throws Exception;
-    // public List<FileInfo> getDirsList(String pathname) throws Exception;
-
-
 }
 

@@ -1,8 +1,15 @@
 package alvion.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by ragham on 1/25/15.
  */
+@XmlRootElement
 public class FileInfo implements Comparable<FileInfo> {
+    @JsonIgnore
     private String name;
     private boolean isDir;
     private String isDirName;
