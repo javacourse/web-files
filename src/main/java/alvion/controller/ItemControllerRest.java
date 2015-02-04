@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ragham on 29.01.2015.
  */
     @Controller
-    @RequestMapping("/rest/")
+    @RequestMapping("rest/")
     //@Produces({"application/xml","application/json"});
 
     public class ItemControllerRest {
@@ -26,7 +26,6 @@ import java.util.List;
     @Autowired
     private FileService fileservice;
 
-    //@RequestMapping(method = RequestMethod.GET)
     @RequestMapping(method = RequestMethod.GET, produces = {"application/json"})//MediaType.APPLICATION_JSON_VALUE
     public  List<FileInfo> init() throws UnsupportedEncodingException {
         List<FileInfo> fileList = new ArrayList();
@@ -37,7 +36,7 @@ import java.util.List;
             fileList = fileservice.getItems(rootFolder);
 
         } catch(Exception e) {
-            System.out.println("xxx");
+            System.out.println("Some Error");
         }
 
         return fileList;
@@ -48,21 +47,19 @@ import java.util.List;
         String curFolderPath = "";
         String prevFolderPath = "";
         curFolderPath = URLDecoder.decode(request.getRequestURI(), "UTF-8");
-        //curFolderPath = request.getRequestURI();
         StringBuilder strBuilder = new StringBuilder();
         curFolderPath = curFolderPath.replace("/rest/listoffiles/","");
         curFolderPath = fileservice.checkpath(curFolderPath);
         prevFolderPath = fileservice.parseStr(fileservice.checkpath(curFolderPath));
         List<FileInfo> fileList = new ArrayList();
-        System.out.println("abcd");
-        System.out.println(rootFolder+curFolderPath);
+        //System.out.println(rootFolder+curFolderPath);
 
         try {
 
             fileList = fileservice.getItems(rootFolder+curFolderPath);
 
         } catch(Exception e) {
-            System.out.println("xxx");
+            System.out.println("Some Error");
         }
 
         return fileList;

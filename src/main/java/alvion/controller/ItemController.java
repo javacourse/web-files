@@ -47,7 +47,7 @@ import java.util.List;
         curFolderPath = URLDecoder.decode(request.getRequestURI(), "UTF-8");
         //curFolderPath = request.getRequestURI();
         StringBuilder strBuilder = new StringBuilder();
-        curFolderPath = curFolderPath.replace("/listoffiles/","");
+        curFolderPath =  curFolderPath.replace("/listoffiles/","");
         curFolderPath = fileservice.checkpath(curFolderPath);
         prevFolderPath = fileservice.parseStr(fileservice.checkpath(curFolderPath));
 
