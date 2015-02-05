@@ -5,5 +5,6 @@
     <br/>
     <a href="<c:url value="/list/item"/>">List</a><br/>
     <a href="<c:url value="/files"/>">File browser</a><br/>
+    <a href="<c:url value="/rest/files"/>">File REST</a><br/>
 </body>
 </html>
