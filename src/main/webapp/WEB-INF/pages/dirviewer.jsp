@@ -12,7 +12,7 @@
         <c:if test="${null != parentFolder}">
             <tr>
                 <td>
-                    <a href="<c:url value="/dirviewer${parentFolder.isEmpty() ? '/' : parentFolder}"/>">..</a>
+                    <a href="<c:url value="/dirviewer/list${parentFolder.isEmpty() ? '/' : parentFolder}"/>">..</a>
                 </td>
             </tr>
         </c:if>
@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <c:if test="${item.isDirectory()}">
-                        <a href='<c:url value="/dirviewer"/>${"/" == currentFolder ? "" : currentFolder}/${item.getName()}'>${item.getName()}</a>
+                        <a href='<c:url value="/dirviewer/list"/>${"/" == currentFolder ? "" : currentFolder}/${item.getName()}'>${item.getName()}</a>
                     </c:if>
                     <c:if test="${!item.isDirectory()}">
                         ${item.getName()}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/dirviewer/")
@@ -20,11 +21,11 @@ public class FileController {
     @Autowired
     private FolderService folderService;
     
-    @RequestMapping(value = "**", method = RequestMethod.GET)
+    @RequestMapping(value = "list/**", method = RequestMethod.GET)
     public ModelAndView list(HttpServletRequest request) throws UnsupportedEncodingException {
         String dir = request.getRequestURI();
         dir = URLDecoder.decode(dir, "UTF-8");
-        dir = dir.substring(21);
+        dir = dir.substring(26);
         
         ModelAndView model = new ModelAndView("dirviewer");
         try {
@@ -32,9 +33,24 @@ public class FileController {
             model.addObject("parentFolder", folderService.getParentFolderName());
             model.addObject("currentFolder", folderService.getFolderName());
             model.addObject("folderContent", folderService.getFolderContent());
-        } catch (FileNotFoundException ex) {
+        } catch (Exception ex) {
             model.setViewName("dirviewer404");
         }
 		return model;
+	}
+    
+    @RequestMapping(value = "json/**", method = RequestMethod.GET)
+    public @ResponseBody FolderService json(HttpServletRequest request) throws UnsupportedEncodingException {
+        String dir = request.getRequestURI();
+        dir = URLDecoder.decode(dir, "UTF-8");
+        dir = dir.substring(26);
+        
+        ModelAndView model = new ModelAndView("dirviewer");
+        try {
+            folderService.setFolder("/".concat(dir));
+            return folderService;
+        } catch (Exception ex) {
+        }
+		return null;
 	}
 }

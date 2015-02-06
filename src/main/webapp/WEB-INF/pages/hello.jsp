@@ -4,6 +4,6 @@
 	<h1>Message : ${message}</h1>
     <br/>
     <a href="<c:url value="/list/item"/>">List</a><br>
-    <a href="<c:url value="/dirviewer/"/>">Dirviewer</a>
+    <a href="<c:url value="/dirviewer/list/"/>">Dirviewer</a>
 </body>
 </html>
