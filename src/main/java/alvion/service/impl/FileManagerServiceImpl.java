@@ -1,6 +1,7 @@
 package alvion.service.impl;
 
 import alvion.bl.FileManager;
+import alvion.dto.FileInfoDto;
 import alvion.service.FileManagerService;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,12 @@ public class FileManagerServiceImpl implements FileManagerService {
     {
 
         return fileManager.showFolderContent();
+    }
+
+    @Override
+    public List<FileInfoDto> showContentOfDir(String path) {
+
+        return fileManager.showFolderContentForPath(path);
     }
 
 

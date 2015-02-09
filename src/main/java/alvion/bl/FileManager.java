@@ -26,6 +26,7 @@ public class FileManager
         pathList.add(initPath);
     }
 
+
     public List<String> changeCurrentDir( String folderName)
     {
         String temp = null;
@@ -57,6 +58,27 @@ public class FileManager
         }
     }
 
+    public List<FileInfoDto> showFolderContentForPath(String path)
+    {
+        List<FileInfoDto> result = new ArrayList<>();
+
+        for (FileInfoDto file : getFiles(getFolderContentWithPath(path), false))
+        {
+            /*System.out.println(file.getName());*/
+            if(null != file)
+                result.add(file);
+        }
+
+        for (FileInfoDto file : getFiles(getFolderContentWithPath(path), true))
+        {
+            if(null != file)
+                result.add(file);
+        }
+        return result;
+    }
+
+
+
     public List<String> showFolderContent()
     {
         List<String> result = new ArrayList<>();
@@ -77,7 +99,7 @@ public class FileManager
     private List<FileInfoDto> getFiles(List<FileInfoDto> files, boolean isFile)
     {
         if (files == null)
-            return null;
+            return new ArrayList<>();
         ArrayList<FileInfoDto> resultFiles = new ArrayList<FileInfoDto>();
 
         for (FileInfoDto fileInfo: files)
@@ -94,6 +116,34 @@ public class FileManager
         ArrayList<FileInfoDto> result = new ArrayList<FileInfoDto>();
 
         String path =  joinArrayWithChar(pathList, "//");
+        File file =  new File(path);
+        if (!file.exists())
+            return null;
+        if (file.isFile())
+            return null;
+
+        if (file.isDirectory())
+        {
+            File[] files =  file.listFiles();
+
+            for ( File item : files){
+
+                FileInfoDto fileInfo = new FileInfoDto();
+                fileInfo.name =  item.getName();
+                fileInfo.size = item.getUsableSpace();
+                fileInfo.isFile = item.isFile();
+                result.add(fileInfo);
+            }
+        }
+
+        return result;
+    }
+
+
+    private List<FileInfoDto> getFolderContentWithPath(String path)
+    {
+        ArrayList<FileInfoDto> result = new ArrayList<FileInfoDto>();
+
         File file =  new File(path);
         if (!file.exists())
             return null;
